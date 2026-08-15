@@ -7,7 +7,7 @@ nonisolated struct GoogleConfiguration: Sendable, Equatable {
     let reversedClientID: String
 
     static func load(from bundle: Bundle = .main) throws -> GoogleConfiguration {
-        guard let url = bundle.url(forResource: "GoogleService-Info", withExtension: "plist") else {
+        guard let url = bundle.url(forResource: "GoogleOAuth-Info", withExtension: "plist") else {
             throw GoogleConfigurationError.fileNotFound
         }
 
@@ -32,11 +32,11 @@ nonisolated enum GoogleConfigurationError: LocalizedError, Equatable, Sendable {
     var errorDescription: String? {
         switch self {
         case .fileNotFound:
-            return "GoogleService-Info.plist is missing from the app bundle."
+            return "GoogleOAuth-Info.plist is missing from the app bundle."
         case .invalidFile:
-            return "GoogleService-Info.plist cannot be read."
+            return "GoogleOAuth-Info.plist cannot be read."
         case .missingOAuthIdentifiers:
-            return "GoogleService-Info.plist does not contain CLIENT_ID and REVERSED_CLIENT_ID."
+            return "GoogleOAuth-Info.plist does not contain CLIENT_ID and REVERSED_CLIENT_ID."
         }
     }
 }

@@ -141,10 +141,10 @@ nonisolated enum GoogleHTTPMethod: String, Sendable {
     case post = "POST"
 }
 
-private struct GoogleAPIErrorResponse: Decodable {
+nonisolated private struct GoogleAPIErrorResponse: Decodable {
     let error: ErrorBody
 
-    struct ErrorBody: Decodable {
+    nonisolated struct ErrorBody: Decodable {
         let message: String
     }
 }

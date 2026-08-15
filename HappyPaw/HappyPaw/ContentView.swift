@@ -12,6 +12,10 @@ struct ContentView: View {
     let onboardingStore: OnboardingStore
     let mainAdministratorScreenStore: MainAdministratorScreenStore
 
+    private var dependencies: AppDependencyProviding {
+        AppDependencies(mainAdministratorScreenStore: mainAdministratorScreenStore)
+    }
+
     var body: some View {
         Group {
             switch launchStore.state.destination {
@@ -19,12 +23,12 @@ struct ContentView: View {
                 LaunchView(store: launchStore)
             case .onboarding:
                 if onboardingStore.state.isCompleted {
-                    MainAdministratorScreenView(store: mainAdministratorScreenStore)
+                    MainTabBarContainer(dependencies: dependencies)
                 } else {
                     OnboardingView(store: onboardingStore)
                 }
             case .mainAdministrator:
-                MainAdministratorScreenView(store: mainAdministratorScreenStore)
+                MainTabBarContainer(dependencies: dependencies)
             }
         }
     }
