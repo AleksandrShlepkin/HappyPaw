@@ -5,6 +5,8 @@
 //  Created by Александр Коротков on 16.06.2026.
 //
 
+import FirebaseCore
+import GoogleSignIn
 import SwiftUI
 
 @main
@@ -18,6 +20,12 @@ struct HappyPawApp: App {
     )
     @State private var mainAdministratorScreenStore = MainAdministratorScreenStore()
 
+    init() {
+        if FirebaseApp.app() == nil {
+            FirebaseApp.configure()
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView(
@@ -25,6 +33,9 @@ struct HappyPawApp: App {
                 onboardingStore: onboardingStore,
                 mainAdministratorScreenStore: mainAdministratorScreenStore
             )
+            .onOpenURL { url in
+                GIDSignIn.sharedInstance.handle(url)
+            }
         }
     }
 

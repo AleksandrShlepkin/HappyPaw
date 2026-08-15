@@ -14,8 +14,10 @@ struct OnboardingView: View {
                         .frame(width: Constants.skipButtonWidth, height: Constants.skipButtonHeight)
                         .clipShape(RoundedRectangle(cornerRadius: Constants.skipButtonCornerRadius))
                     
-                    Text(Constants.skipTitle)
-                        .foregroundStyle(Constants.skipButtonTextColor)
+                    Button(Constants.skipTitle) {
+                        store.send(.skipTapped)
+                    }
+                    .foregroundStyle(Constants.skipButtonTextColor)
                 }
             }
             OnboardingCard(
